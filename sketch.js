@@ -18,13 +18,21 @@ function setup() {
   });
 }
 
+let handObj = {
+  x: [],
+  y: []
+}
+
 function draw() {
   background(0);
   for (let hand of hands) {
     for (let kp of hand.keypoints) {
+      handObj.x.push(kp.x);
+      handObj.y.push(kp.y);
       fill(0, 255, 0);
       noStroke();
       circle(kp.x, kp.y, 10);
     }
   }
+  console.log(handObj.x.length)
 }
