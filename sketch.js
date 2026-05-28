@@ -13,26 +13,48 @@ function setup() {
   createCanvas(640, 480);
   let video = createCapture(VIDEO);
   video.hide();
-  handPose.detectStart(video, function(results) {
+  handPose.detectStart(video, function (results) {
     hands = results;
   });
 }
+let current = 0;
+const start = Date.now();
 
 let handObj = {
-  x: [],
-  y: []
+  left: {
+    x: [],
+    y: [],
+  },
+  right: {
+    x: [],
+    y: []
+  }
 }
 
+let i = 0;
+
 function draw() {
-  background(0);
-  for (let hand of hands) {
-    for (let kp of hand.keypoints) {
-      handObj.x.push(kp.x);
-      handObj.y.push(kp.y);
-      fill(0, 255, 0);
-      noStroke();
-      circle(kp.x, kp.y, 10);
+  if (!(Date.now() >= start + 10000)) {
+    background(0);
+    for (let hand of hands) {
+      if (hands.length == 1) {
+        for (let kp of hand.keypoints) {
+          handObj.left.x.push(kp.x);
+          handObj.left.y.push(kp.y);
+          fill(0, 255, 0);
+          noStroke();
+          circle(kp.x, kp.y, 10);
+        }
+      }
     }
-  }
-  console.log(handObj.x.length)
+    console.log(handObj.left.x.length)
+  } else {
+    fill(200, 50, 0);
+    noStroke();
+    for (j = 0; j < 21; j++) {
+      circle(handObj.left.x[i + j], handObj.left.y[i + j], 10);
+    }
+    i+= 21;
+  }//drawing stuff from the data
+
 }
