@@ -49,13 +49,36 @@ function draw() {
     }
     console.log(handObj.left.x.length)
   } else {
-    fill(200, 50, 0);
+    let xVals = [];
+    let yVals = [];
+
+    // gets all of the values for the current hand frame
+    for (k = 0; k < 21; k++) {
+      xVals.push(handObj.left.x[i + k])
+      yVals.push(handObj.left.y[i + k])
+    }
+
+    //x vals how far are u apart
+    xVals.sort((a, b) => b - a);
+    let sumX = 0;
+    for (let v = 0; v < xVals.length - 1; ++v) {
+      sumX += xVals[v] - xVals[v + 1];
+    }
+
+    //y vals how far are u apart
+    yVals.sort((a, b) => b - a);
+    let sumY = 0;
+    for (let v = 0; v < yVals.length - 1; ++v) {
+      sumY += yVals[v] - yVals[v + 1];
+    }
+
+    
+    fill(map(random(), 0, 1, 0, 255), 0, 0);
     noStroke();
-    for (k = 0; k <21; k++) {
-    }
+
     for (j = 0; j < 21; j++) {
-      circle(handObj.left.x[i + j], handObj.left.y[i + j], 10);
+      circle(handObj.left.x[i + j], handObj.left.y[i + j], sumX+sumY);
     }
-    i+= 21;
+    i += 21;
   }//drawing stuff from the data
 }
