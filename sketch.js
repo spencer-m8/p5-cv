@@ -13,31 +13,44 @@ function setup() {
   createCanvas(640, 480);
   let video = createCapture(VIDEO);
   video.hide();
-  handPose.detectStart(video, function(results) {
+  handPose.detectStart(video, function (results) {
     hands = results;
   });
+  let timeStart = currentTime;
 }
-
-let maxHands = 3;
-let handsArray = [];
-handsArray.length = maxHands;
-let numHands = 0;
+//let arrayPoints = [];
 
 function draw() {
   background(0);
-  for (let hand of hands) {
-    let j = 0;
-    for (let kp of hand.keypoints) {
-      fill(0, 255, 0);
-      noStroke();
-      circle(kp.x, kp.y, 10);
-      handsArray[numHands][0][j] = kp.x;
-      handsArray[numHands][1][j] = kp.y;
-      console.log("x: " + handsArray[numHands][0][j]);
-      console.log("y: " + handsArray[numHands][1][j]);
+  //if (currentTime >= timeStart + 10000) {
+    //where we do something
+  //} else {
+    for (let hand of hands) {
+      //let i = 0;
+      for (let kp of hand.keypoints) {
+        //arrayPoints[i] = "" + kp.x + "," + kp.y;
+        //i++;
+        fill(0, 255, 0);
+        noStroke();
+        circle(kp.x, kp.y, 10);
+        /*for (j = 0; j < arrayPoints.length; j++) {
+          console.log("coord: " + arrayPoints[j]);
+        }
+          */
+        //handsArray[numHands][0][j] = kp.x;
+        //handsArray[numHands][1][j] = kp.y;
+        //console.log("x: " + handsArray[numHands][0][j]);
+        //console.log("y: " + handsArray[numHands][1][j]);
+        //console.log(kp.x + " " + kp.y);
+      }
+      //numHands++;
     }
-    numHands++;
-  }
+    //data collection
+  //}
+}
+
+function storePoints(x, y) {
+  //add these to an array
 }
 
 //10s video
