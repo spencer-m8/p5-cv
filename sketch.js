@@ -13,19 +13,35 @@ function setup() {
   createCanvas(640, 480);
   let video = createCapture(VIDEO);
   video.hide();
-  handPose.detectStart(video, function(results) {
+  handPose.detectStart(video, function (results) {
     hands = results;
   });
 }
 
+let handObj = {
+  left: {
+    x: [],
+    y: []
+  },
+  right: {
+    x: [],
+    y: []
+  }
+}
+
+let handObj;
+
 function draw() {
   background(0);
-  for (let hand of hands) {
+  for (let hand of hands) {//2 hands
     for (let kp of hand.keypoints) {
       fill(0, 255, 0);
       noStroke();
       circle(kp.x, kp.y, 10);
+      //handObj.left.x.push(kp.x);
+      //handObj.left.y.push(kp.y);
     }
+    //console.log(handObj.left.x.length);
   }
 }
 
