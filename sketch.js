@@ -51,10 +51,11 @@ function draw() {
   } else {
     fill(200, 50, 0);
     noStroke();
+    for (k = 0; k <21; k++) {
+    }
     for (j = 0; j < 21; j++) {
       circle(handObj.left.x[i + j], handObj.left.y[i + j], 10);
     }
     i+= 21;
   }//drawing stuff from the data
-
 }
