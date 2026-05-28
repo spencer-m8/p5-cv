@@ -28,3 +28,8 @@ function draw() {
     }
   }
 }
+
+//10s video
+//keep all hand points in arrays
+//do math with them
+//colour changing
