@@ -9,6 +9,8 @@ function preload() {
   handPose = ml5.handPose();
 }
 
+let button;
+
 function setup() {
   createCanvas(640, 480);
   let video = createCapture(VIDEO);
@@ -16,12 +18,13 @@ function setup() {
   handPose.detectStart(video, function (results) {
     hands = results;
   });
-  let button = createButton('start');
-  button.position(width/2, height/2);
+  button = createButton('start');
+  button.position(width / 2, height / 2);
+  button.mouseClicked(hideButton);
 }
-let button;
+
 let current = 0;
-const start = Date.now();
+
 
 let handObj = {
   left: {
@@ -53,38 +56,61 @@ function changeState(number) {
   state = number;
 }
 
+function hideButton() {
+  changeState(1);
+  button.hide();
+}
+
+
+let start = 0;
+let preRecording = true;
+
 function draw() {
+  background(0);
   switch (state) {
     case 0:
+      console.log("state 1")
+      //preRecording = true;
+      break;
       //wait for button
     case 1:
-      //change based on time
-      case 2:
-        //wait
-  }
-   
-  if (!(Date.now() >= start + 10000)) {
-    background(0);
-    for (let hand of hands) {
-      if (hands.length == 1) {
-        for (let kp of hand.keypoints) {
-          handObj.left.x.push(kp.x);
-          handObj.left.y.push(kp.y);
-          fill(0, 255, 0);
-          noStroke();
-          circle(kp.x, kp.y, 10);
+      console.log("state 2")
+      //if (preRecording == true) {
+       // start = Date.now();
+        //console.log(start);
+        //preRecording = false;
+      //}
+      break;
+      /*for (let hand of hands) {
+        if (hands.length == 1) {
+          for (let kp of hand.keypoints) {
+            handObj.left.x.push(kp.x);
+            handObj.left.y.push(kp.y);
+            fill(0, 255, 0);
+            noStroke();
+            circle(kp.x, kp.y, 10);
+          }
         }
       }
-    }
-    console.log(handObj.left.x.length)
+      console.log(handObj.left.x.length)
+            */
+    //change based on time
+    case 2:
+    //wait
+    break;
+  }
+/*
+  if (!(Date.now() >= start + 10000)) {
+
   } else {
     fill(200, 50, 0);
     noStroke();
-    for (k = 0; k <21; k++) {
+    for (k = 0; k < 21; k++) {
     }
     for (j = 0; j < 21; j++) {
       circle(handObj.left.x[i + j], handObj.left.y[i + j], 10);
     }
-    i+= 21;
+    i += 21;
   }//drawing stuff from the data
+  */
 }
