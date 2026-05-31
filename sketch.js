@@ -16,7 +16,10 @@ function setup() {
   handPose.detectStart(video, function (results) {
     hands = results;
   });
+  let button = createButton('start');
+  button.position(width/2, height/2);
 }
+let button;
 let current = 0;
 const start = Date.now();
 
@@ -36,12 +39,30 @@ let i = 0;
 //do this with three different switch cases in the draw, one for waiting
 //then a flag for running, this is then changed after 10s.
 
-// (waiting) -> (recording) ---> (process and show) -> (allow capture)
-//     ^                                |
-//     |                                v
-//     ------------------------------(reset)
+// (waiting) -> (recording) ---> (process and show) -> (allow capture) 
+//     ^                                |      ^             |
+//     |                                v      |             |
+//     ------------------------------(reset)   ---------------
+
+let state = 0
+//0: waiting
+//1: rec
+//2: processing/show
+
+function changeState(number) {
+  state = number;
+}
 
 function draw() {
+  switch (state) {
+    case 0:
+      //wait for button
+    case 1:
+      //change based on time
+      case 2:
+        //wait
+  }
+   
   if (!(Date.now() >= start + 10000)) {
     background(0);
     for (let hand of hands) {
