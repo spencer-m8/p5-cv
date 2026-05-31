@@ -32,6 +32,14 @@ let handObj = {
 }
 
 let i = 0;
+//wait with a button, then record
+//do this with three different switch cases in the draw, one for waiting
+//then a flag for running, this is then changed after 10s.
+
+// (waiting) -> (recording) ---> (process and show) -> (allow capture)
+//     ^                                |
+//     |                                v
+//     ------------------------------(reset)
 
 function draw() {
   if (!(Date.now() >= start + 10000)) {
